@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <button>Click Me!</button>
+    <div class="wrapper"></div>
+
+    <script src="https://code.jquery.com/jquery-2.0.3.min.js"></script>
+    <script type="text/javascript">
+
+    $('button').on('click', function() {
+        $.ajax({
+          url: 'materials/youtube.json'
+        })
+        .then(function(youtubeData) {
+          console.log(youtubeData)
+          var titleVideo = youtubeData.data.items["0"].title 
+          var imagePath = youtubeData.data.items["0"].thumbnail.hqDefault
+          var videoUrl = youtubeData.data.items["0"].player.default
+
+          var contentHtml = ''
+          contentHtml += '<h1>' + titleVideo + '</h1>'
+          contentHtml += '<a href="' + videoUrl + '"><img src="' + imagePath + '"" /></a>'
+
+          $('.wrapper').html( contentHtml )
+
+/*          console.log(titleVideo)
+          console.log(imagePath)
+          console.log(videoUrl)*/
+        })
+    });
+
+
+
+    </script>
+</body>
+
+</html>
