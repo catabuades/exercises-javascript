@@ -5,15 +5,13 @@ $('#f1-calculate').on('click', function (event) {
   var b = $('#f1-b').val()
   var result = a / 100 * b
   if (isNaN(result)) {
-    $('#f2').addClass('has-error')
-  } else {
-    $('#f2').removeClass('has-error')
-  }
-/*  if (isNaN($('#f1-result').val()) === true) {
     $('#f1').addClass('has-error')
+    if (isNaN(result)) {
+      $('#f1-a' || '#f1-b').detach()
+    }
   } else {
     $('#f1').removeClass('has-error')
-  } */
+  }
   $('#f1-result').val(result)
 })
 
