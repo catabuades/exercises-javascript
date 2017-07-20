@@ -1,12 +1,12 @@
 $('#form-search button').on('click', function (e) {
   e.preventDefault()
   var beerWantToSearch = $('input#beerChoise').val()
-  var urlAll = 'https://quiet-inlet-67115.herokuapp.com/api/search/all?q='
+  var urlSearchBeer = 'https://quiet-inlet-67115.herokuapp.com/api/search/all?q='
   var imageBeer = ''
 /*  var predefinedImage = 'http://snowbrains.com/wp-content/uploads/2013/09/dc6a6677-0ea6-4b1f-976b-702c7a3e7a89.jpeg'
 */
   $.ajax({
-    url: urlAll + beerWantToSearch
+    url: urlSearchBeer + beerWantToSearch
   })
         .then(function (aBeer) {
           console.log(aBeer)
@@ -33,14 +33,16 @@ $('#list-beers').on('change', function () {
   })
         .then(function (idBeer) {
           var nameBeer = idBeer.name
-          $('h3').text(nameBeer)
-          var descriptionBeer = idBeer.style.description
-          $('p').text(descriptionBeer)
-          imageBeer = idBeer.labels.medium
-          if (idBeer.labels) {
+          var descriptionBeer = idBeer.style.description || 'Description is not available'
+          var imageBeer = idBeer.labels ? idBeer.labels.medium : 'img/not-found.png'
+
+ /*         if (idBeer.labels) {
             $('#imageBeer').attr('src', imageBeer)
           } else {
             $('#imageBeer').attr('src', url('img/beer-glass.jpg'))
-          }
+          } */
+          $('#imageBeer').attr('src', imageBeer)
+          $('#infoBeer h3').text(nameBeer)
+          $('#infoBeer p').text(descriptionBeer)
         })
 })
